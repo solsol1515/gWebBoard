@@ -1,5 +1,6 @@
 package com.javassem.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,15 @@ public class BoardController {
    
    
    @RequestMapping("getBoardList.do") // 목록보기
-   public void getBoardList(Model m) {
-      List<BoardVO> list=boardService.getBoardList();
+   public void getBoardList(String searchCondition, String searchKeyword, Model m) {
+      System.out.println("searchCondition: " + searchCondition);
+      System.out.println("searchKeyword: " + searchKeyword);
+      
+      HashMap map = new HashMap();
+      map.put("searchCondition", searchCondition);
+      map.put("searchKeyword", searchKeyword);
+      
+	   List<BoardVO> list=boardService.getBoardList(map);
       m.addAttribute("boardList", list);
    } // end of getBoardList
    
@@ -58,6 +66,10 @@ public class BoardController {
       boardService.deleteBoard(vo);
       return "redirect:getBoardList.do";
    }
-   
+   // 컨트롤러 테스트 함수
+   @RequestMapping("test.do")
+   public void test() {
+	   System.out.println("test.do 요청 확인");
+   }
    
 }

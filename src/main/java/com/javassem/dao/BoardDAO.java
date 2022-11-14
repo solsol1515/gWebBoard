@@ -1,5 +1,6 @@
 package com.javassem.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.javassem.domain.BoardVO;
@@ -13,5 +14,5 @@ public interface BoardDAO {
 
 	public BoardVO getBoard(BoardVO vo) ;
 
-	public List<BoardVO> getBoardList() ;
+	public List<BoardVO> getBoardList(HashMap map) ;
 }

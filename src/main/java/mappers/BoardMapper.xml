@@ -35,12 +35,21 @@
 		WHERE SEQ = #{seq}
 	</select>
 	
-	<select id="getBoardList" resultType="board"  >
+	<select id="getBoardList" parameterType="hashmap" resultType="board">
 			SELECT *
 			FROM BOARD
+			<where>
+			<if test="searchCondition !=null">
+				${searchCondition} like '%${searchKeyword}%'
+			</if>
+			</where>
 			ORDER BY SEQ DESC
-	</select> 
+	</select>
 	
+	<!-- 
+			#{}: 	PreparedStatement (문자열에 자동으로 '' 붙여줌)
+			${}:		Statement
+	 -->
 	
 	<!-- 검색 추가  -->
 	<!-- 
